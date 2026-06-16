@@ -1,6 +1,6 @@
 # 🤖 BOB — Beyond Our Borders
 
-> **BOB (Beyond Ordinary Boundaries)** — KI-Assistent und Tool-Baukasten für **Hermes Agent**, entwickelt von **Oliver Schreiber (Rook)** und **Anne Krenzin** // *Dein Gesundheitsmanager*
+> **BOB (Beyond Ordinary Boundaries)** — KI-Assistent und Tool-Baukasten für **Hermes Agent**, entwickelt von **Rook** // *BOB - Beyond Our Borders*
 
 Dieses Repository enthält alle **Custom Skills, Bot-Scripts und Konfigurationen**, die für den Hermes Agent erstellt wurden — komplett dokumentiert, portabel und einsatzbereit für jedes Hermes-System.
 
