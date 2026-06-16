@@ -153,10 +153,9 @@ BOB---Beyond-Our-Borders/
 ## 👤 Über
 
 **Betreiber:** Rook // BOB
-**KI-Assistent:** BOB (Beyond Ordinary Boundaries)
-**Partnerin:** Guppy  
+**KI-Assistent:** BOB (Beyond Our Borders)
 **Plattform:** [Hermes Agent](https://hermes-agent.nousresearch.com) von Nous Research  
-**Website:** [[[BOB](https://beyondourborders.cloud/)]
+**Website:** [[[BOB - Beyond Our Borders](https://beyondourborders.cloud/)]
 
 ---
 
