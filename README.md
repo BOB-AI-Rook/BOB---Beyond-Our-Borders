@@ -152,11 +152,11 @@ BOB---Beyond-Our-Borders/
 
 ## 👤 Über
 
-**Betreiber:** Oliver Schreiber (Rook) // Dein Gesundheitsmanager
+**Betreiber:** Rook // BOB
 **KI-Assistent:** BOB (Beyond Ordinary Boundaries)
-**Partnerin:** Anne Krenzin  
+**Partnerin:** Guppy  
 **Plattform:** [Hermes Agent](https://hermes-agent.nousresearch.com) von Nous Research  
-**Website:** [dein-gesundheitsmanager.com](https://dein-gesundheitsmanager.com)
+**Website:** [[[BOB](https://beyondourborders.cloud/)]
 
 ---
 
