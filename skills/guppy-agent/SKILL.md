@@ -39,7 +39,3 @@ Guppy läuft als eigenständiger Discord-Bot (GUPPY#3533) im Channel `#guppy-rec
 - **Kein DuckDuckGo-Fallback, keine hartcodierten Trigger** – jede Nachricht geht an OpenRouter
 
 ## Wichtige Kontexte
-
-- **Hauptinteresse:** Thailand (Reise Juli/August 2026), Unternehmen Dein Gesundheitsmanager
-- **Relevante Domains:** dein-gesundheitsmanager.com, purplecompanion.com
-- Bei Reisefragen: Besondere Aufmerksamkeit auf Thailand-Infos (Wetter, Verkehr, Events, Sicherheit)
