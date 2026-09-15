@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BOB — Agentic AI that gets things done</title>
+<meta name="description" content="BOB unifies multi-agent orchestration with real-time knowledge retrieval and workflow automation — turning plans into finished work, not just answers.">
+<meta property="og:title" content="BOB — Agentic AI that gets things done">
+<meta property="og:description" content="Multi-agent orchestration, real-time knowledge retrieval and workflow automation. Built on HERMES.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://beyondourborders.cloud/">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/favicon.svg">
+<meta name="theme-color" content="#F7F1E6">
+<link rel="preload" href="../assets/fonts/anton-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/space-grotesk-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bob.css">
+<style>
+  /* ---- Seitenspezifisches Layout. Alles andere kommt aus bob.css. ---- */
+  .site { padding-block: var(--sp-5) var(--sp-9); }
+  .section { padding-block: clamp(var(--sp-7), 6vw, var(--sp-8)); }
+  .section--tight { padding-block: var(--sp-7); }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--sp-6); align-items: center; }
+  .hero__art { position: relative; min-height: 460px; }
+  .hero__art img { position: absolute; right: 8%; bottom: 0; height: 430px; width: auto; object-fit: contain; }
+  .hero__note { position: absolute; left: 0; bottom: 6%; width: 200px; padding: 14px 18px; }
+
+  /* Zweispalter mit Textblock links, Panelinhalt rechts */
+  .split { display: grid; grid-template-columns: .9fr 1.4fr .8fr; gap: var(--sp-6); align-items: center; }
+  .arch  { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--sp-7) var(--sp-6); }
+  .cta   { display: grid; grid-template-columns: 1.2fr 1fr .9fr; gap: var(--sp-6); align-items: center; }
+  .foot  { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1.2fr; gap: var(--sp-6); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: var(--sp-5); }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: var(--sp-5); }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: var(--sp-6); }
+
+  .metric-card { border-top: 1px solid var(--line); padding-top: var(--sp-4); }
+  .metric-card p { font-size: var(--fs-sm); color: var(--text-muted); margin: var(--sp-2) 0 0; max-width: 44ch; }
+
+  @media (max-width: 920px) {
+    .hero, .split, .cta, .arch { grid-template-columns: 1fr; }
+    .hero__art { min-height: 360px; order: -1; }
+    .hero__art img { height: 330px; right: 6%; }
+    .foot { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) {
+    .foot { grid-template-columns: 1fr; }
+    .hero__note { position: static; width: auto; margin-top: var(--sp-4); }
+  }
+</style>
+</head>
+<body class="bob-grain">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap site">
+
+<!-- ============================ NAV ============================ -->
+<header>
+  <nav class="nav" aria-label="Main">
+    <a class="nav__logo" href="/" aria-label="BOB — Beyond Our Borders, home">
+      <svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-starburst"/></svg>
+      <span class="mark"><b>BOB</b><small>Beyond Our Borders</small></span>
+    </a>
+    <div class="nav__links">
+      <a href="#main" aria-current="page">Home</a>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#system">System</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="btn btn--primary" href="mailto:hello@beyondourborders.cloud">Get in touch<span class="btn__dot"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right"/></svg></span></a>
+    <button class="icon-btn nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMobile" aria-label="Open menu">
+      <svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-chevron-down"/></svg>
+    </button>
+  </nav>
+  <div class="nav__mobile" id="navMobile" hidden>
+    <a href="#main">Home</a><a href="#about">About</a><a href="#features">Features</a>
+    <a href="#system">System</a><a href="#work">Work</a><a href="#contact">Contact</a>
+    <a class="btn btn--primary" href="mailto:hello@beyondourborders.cloud" style="justify-self:start">Get in touch<span class="btn__dot"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right"/></svg></span></a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================ HERO ============================ -->
+<section class="section hero">
+  <div>
+    <span class="chip"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-sparkle"/></svg> Agentic AI Framework</span>
+    <h1 class="d1" style="margin:var(--sp-5) 0 var(--sp-4)">AGENTIC AI<br><span class="d-accent">THAT GETS</span><br>THINGS DONE.</h1>
+    <p class="lead muted">BOB unifies multi-agent orchestration with real-time knowledge retrieval and workflow automation — turning plans into finished work, not just answers.</p>
+    <div class="row" style="margin-top:var(--sp-6)">
+      <a class="btn btn--primary" href="#features">Explore<span class="btn__dot"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right"/></svg></span></a>
+      <a class="btn btn--text" href="#system">See the system<span class="btn__dot"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-ne"/></svg></span></a>
+    </div>
+    <div class="trustbar" style="margin-top:var(--sp-7)">
+      <span class="trustbar__claim">HERMES v5.5<br>All systems nominal</span>
+      <span class="trustbar__sep"></span>
+      <span class="trustbar__claim" style="color:var(--text-muted)">Measured across<br>1,200+ production test suites</span>
+      <span class="trustbar__sep"></span>
+      <span class="trustbar__marks"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-globe-wire"/></svg><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-orbit"/></svg></span>
+    </div>
+  </div>
+  <div class="hero__art">
+    <div class="circle-blob deco" style="width:min(340px,78%);aspect-ratio:1;right:6%;top:4%"></div>
+    <svg class="deco" style="right:0;top:0;width:58px;color:var(--accent)" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-starburst"/></svg>
+    <svg class="deco" style="left:4%;top:8%;width:70px;color:var(--accent);opacity:.45" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-orbit"/></svg>
+    <img src="../assets/img/hero-cutout.webp" alt="" width="1000" height="1246" fetchpriority="high">
+    <div class="panel panel--cream hero__note">
+      <span class="label" style="line-height:1.8">Plans in.<br>Finished work<br>out.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ABOUT ============================ -->
+<section class="section" id="about">
+  <div class="panel panel--olive on-dark">
+    <div class="split">
+      <div class="framed"><img src="../assets/img/about-workstation.webp" alt="Vintage computer workstation with glowing CRT terminals" width="1000" height="755" loading="lazy" style="aspect-ratio:4/3"></div>
+      <div>
+        <span class="label" style="color:var(--accent)">About HERMES</span>
+        <h2 class="d2" style="margin:var(--sp-3) 0 var(--sp-4)">BUILT ON<br>HERMES</h2>
+        <p class="muted-invert" style="max-width:48ch;margin:0">HERMES gives BOB its structure — a core orchestrator that interprets intent, plans the steps, and routes them to the right agent. Every response is grounded, and every task gets followed through, end to end.</p>
+        <div class="row" style="margin-top:var(--sp-5);gap:var(--sp-6)">
+          <a class="btn btn--bone" href="#system">More about HERMES<span class="btn__dot"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right"/></svg></span></a>
+          <span class="script" style="color:var(--bob-bone)">Beyond</span>
+        </div>
+      </div>
+      <ul class="facts">
+        <li><span class="dot"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-orchestration"/></svg></span><span>3 Core<br>Agent Roles</span></li>
+        <li><span class="dot"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-automation"/></svg></span><span>4 Step<br>Orchestration</span></li>
+        <li><span class="dot"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-shield"/></svg></span><span>Always on —<br>the standard</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FEATURES ============================ -->
+<section class="section" id="features">
+  <div class="section-head"><span class="chip">What BOB does</span><span class="rule"></span></div>
+  <div class="cards">
+    <article class="card">
+      <div class="badge-icon"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-orchestration"/></svg></div>
+      <div class="card__body">
+        <span class="label muted">01 // Orchestration</span>
+        <h3 class="d4" style="margin:6px 0 8px">Multi-Agent Orchestration</h3>
+        <p>Deconstructs requests into sub-tasks and dispatches each to the right agent — in parallel where it helps, in sequence where it has to.</p>
+      </div>
+      <a class="icon-btn" href="#system" aria-label="Multi-Agent Orchestration — see the system"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right"/></svg></a>
+    </article>
+    <article class="card">
+      <div class="badge-icon badge-icon--olive"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-automation"/></svg></div>
+      <div class="card__body">
+        <span class="label muted">02 // Automation</span>
+        <h3 class="d4" style="margin:6px 0 8px">Workflow Automation</h3>
+        <p>Executes multi-step processes end to end — across the tools your team already uses. No migration required.</p>
+      </div>
+      <a class="icon-btn" href="#system" aria-label="Workflow Automation — see the system"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right"/></svg></a>
+    </article>
+    <article class="card">
+      <div class="badge-icon badge-icon--ink"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-knowledge"/></svg></div>
+      <div class="card__body">
+        <span class="label muted">03 // Knowledge &amp; RAG</span>
+        <h3 class="d4" style="margin:6px 0 8px">Knowledge &amp; RAG</h3>
+        <p>Retrieves and grounds every response in your own documents and data. Every answer cites its source.</p>
+      </div>
+      <a class="icon-btn" href="#system" aria-label="Knowledge and RAG — see the system"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right"/></svg></a>
+    </article>
+    <article class="card">
+      <div class="badge-icon"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-integrations"/></svg></div>
+      <div class="card__body">
+        <span class="label muted">04 // Integrations</span>
+        <h3 class="d4" style="margin:6px 0 8px">System Integrations</h3>
+        <p>Connects to your APIs and existing systems — so BOB acts on your stack, not just talks about it.</p>
+      </div>
+      <a class="icon-btn" href="#system" aria-label="System Integrations — see the system"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right"/></svg></a>
+    </article>
+  </div>
+</section>
+
+<!-- ============================ SYSTEM ============================ -->
+<section class="section" id="system">
+  <div class="section-head"><span class="chip">Architecture &amp; benchmarks</span><span class="rule"></span>
+    <span class="label muted">HERMES v5.5 // All systems nominal</span></div>
+  <h2 class="d2" style="margin:0 0 var(--sp-4)">STRUCTURED REASONING.<br><span class="d-accent">SUB-MILLISECOND</span> EXECUTION.</h2>
+  <p class="lead muted" style="margin:0 0 var(--sp-6)">How the HERMES framework orchestrates multi-agent tasks — from intent parsing to verified delivery.</p>
+
+  <div class="panel panel--ink on-dark">
+    <div class="arch">
+      <div class="metric">
+        <div class="metric__head"><span class="metric__idx">01</span><span class="metric__name">HERMES Engine</span><span class="metric__value">95% confidence</span></div>
+        <div class="metric__title">Multi-Agent DAG Decomposition</div>
+        <p>Breaks complex monolithic requests into directed acyclic execution graphs, dispatching subroutines across specialized agents in parallel.</p>
+      </div>
+      <div class="metric">
+        <div class="metric__head"><span class="metric__idx">02</span><span class="metric__name">Vector Flash</span><span class="metric__value">&lt; 20ms lookup</span></div>
+        <div class="metric__title">Real-Time Knowledge &amp; RAG</div>
+        <p>Indexes internal docs, APIs, and codebase repositories into high-dimensional vector spaces. Every response strictly cites its source.</p>
+      </div>
+      <div class="metric">
+        <div class="metric__head"><span class="metric__idx">03</span><span class="metric__name">AST Compiler</span><span class="metric__value">88% auto-heal</span></div>
+        <div class="metric__title">Autonomous Code &amp; Sandboxes</div>
+        <p>Generates validated code and executes test suites in isolated sandboxes with automated exception handling and zero-leak memory safety. Runtime recovery included.</p>
+      </div>
+      <div class="metric">
+        <div class="metric__head"><span class="metric__idx">04</span><span class="metric__name">AES-256 Enclave</span><span class="metric__value">Sub-millisecond</span></div>
+        <div class="metric__title">Contextual Memory Vault</div>
+        <p>Maintains multi-turn context, decision trees, and cryptographic audit trails across long-horizon engineering missions.</p>
+      </div>
+    </div>
+
+    <hr class="hairline" style="margin:var(--sp-7) 0 var(--sp-5)">
+    <span class="label" style="color:var(--accent)">Execution loop</span>
+    <div class="flow" style="margin-top:var(--sp-4)">
+      <span class="flow__step"><span class="flow__n">1</span><span class="flow__label">Understand</span></span>
+      <span class="flow__arrow"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right"/></svg></span>
+      <span class="flow__step"><span class="flow__n">2</span><span class="flow__label">Route</span></span>
+      <span class="flow__arrow"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right"/></svg></span>
+      <span class="flow__step"><span class="flow__n">3</span><span class="flow__label">Execute</span></span>
+      <span class="flow__arrow"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right"/></svg></span>
+      <span class="flow__step"><span class="flow__n">4</span><span class="flow__label">Deliver</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ WORK / MODULES ============================ -->
+<section class="section" id="work">
+  <div class="section-head"><span class="chip">Featured modules</span><span class="rule"></span>
+    <a class="btn btn--text" href="#contact">All modules<span class="btn__dot"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right"/></svg></span></a></div>
+
+  <a class="tile" href="#system" style="margin-bottom:var(--sp-6)">
+    <div class="tile__media" style="aspect-ratio:21/9">
+      <img src="../assets/img/crt-set.webp" alt="Vintage television set displaying a glowing wireframe torus" width="1000" height="755" loading="lazy">
+      <span class="tile__play"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-ne"/></svg></span>
+    </div>
+    <div class="row" style="justify-content:space-between;align-items:flex-end">
+      <div><div class="tile__title">HERMES Core</div>
+        <div class="tile__cat" style="max-width:62ch">The orchestration framework underneath every module: it reads intent, plans the steps, and decides which agent runs next.</div></div>
+      <span class="label" style="color:var(--accent)">Inside the framework</span>
+    </div>
+  </a>
+
+  <div class="tiles">
+    <a class="tile" href="#features"><div class="tile__media"><img src="../assets/img/module-01.webp" alt="" width="800" height="533" loading="lazy"><span class="tile__play"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-ne"/></svg></span></div>
+      <div class="tile__title">Orchestrator</div><div class="tile__cat">Deconstructs requests into sub-tasks and dispatches each to the right specialized agent.</div></a>
+    <a class="tile" href="#features"><div class="tile__media"><img src="../assets/img/module-02.webp" alt="" width="800" height="533" loading="lazy"><span class="tile__play"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-ne"/></svg></span></div>
+      <div class="tile__title">Autopilot</div><div class="tile__cat">Executes multi-step workflows end to end — across the tools your team uses, no migration needed.</div></a>
+    <a class="tile" href="#features"><div class="tile__media"><img src="../assets/img/module-03.webp" alt="" width="800" height="533" loading="lazy"><span class="tile__play"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-ne"/></svg></span></div>
+      <div class="tile__title">Atlas</div><div class="tile__cat">Retrieves and grounds every answer in your own documents and data — citations built in.</div></a>
+    <a class="tile" href="#features"><div class="tile__media"><img src="../assets/img/module-04.webp" alt="" width="800" height="533" loading="lazy"><span class="tile__play"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-ne"/></svg></span></div>
+      <div class="tile__title">Bridge</div><div class="tile__cat">Connects BOB to your APIs and existing infrastructure — so it acts, not just replies.</div></a>
+  </div>
+</section>
+
+<!-- ============================ PROVEN ============================ -->
+<section class="section">
+  <div class="section-head"><span class="chip">Proven in production</span><span class="rule"></span></div>
+  <h2 class="d2" style="margin:0 0 var(--sp-4)">MEASURABLE IMPACT<br>ACROSS <span class="d-accent">EVERY WORKFLOW</span></h2>
+  <p class="lead muted" style="margin:0 0 var(--sp-7)">Empirical benchmarks from multi-agent orchestration across production engineering pipelines.</p>
+
+  <div class="stats">
+    <div class="metric-card">
+      <div class="stat"><span class="stat__num">94%</span><span class="stat__cap">Task completion rate</span></div>
+      <p>Mean success rate across multi-agent DAG workflows without requiring manual human intervention or restarts.</p>
+    </div>
+    <div class="metric-card">
+      <div class="stat"><span class="stat__num">&lt; 2.0s</span><span class="stat__cap">Mean response latency · 99.2% single-turn accuracy</span></div>
+      <p>High-throughput vector lookup and instantaneous clone dispatch at over 120k tokens per minute throughput.</p>
+    </div>
+    <div class="metric-card">
+      <div class="stat"><span class="stat__num">0 hrs</span><span class="stat__cap">Migration friction · &lt; 20ms vector retrieval</span></div>
+      <p>Native integration with existing Git repos, CI/CD runners, and custom REST/GraphQL APIs with zero replatforming.</p>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top:var(--sp-7);gap:var(--sp-3)">
+    <span class="chip chip--ghost"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-check"/></svg> Drop-in API compatibility</span>
+    <span class="chip chip--ghost"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-clock"/></svg> Continuous health checks</span>
+    <span class="chip chip--ghost"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-shield"/></svg> Cryptographic audit trail</span>
+    <span class="chip chip--ghost"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-bolt"/></svg> Zero memory leaks</span>
+  </div>
+</section>
+
+<!-- ============================ CTA ============================ -->
+<section class="section section--tight" id="contact">
+  <div class="panel panel--rust on-dark">
+    <div class="cta">
+      <div>
+        <span class="label" style="opacity:.85">Ready to put a real agent to work?</span>
+        <h2 class="d2" style="margin:var(--sp-3) 0 0;color:var(--bob-cream)">STOP DESCRIBING.<br>LET BOB BUILD IT.</h2>
+      </div>
+      <div>
+        <p style="margin:0 0 var(--sp-5);max-width:34ch">Tell us what needs to get done. We'll show you how BOB actually finishes it.</p>
+        <a class="btn btn--bone" href="mailto:hello@beyondourborders.cloud">Get in touch<span class="btn__dot"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right"/></svg></span></a>
+      </div>
+      <div style="position:relative">
+        <div class="stack">
+          <div><span class="label" style="opacity:.8">Email</span>
+            <div><a href="mailto:hello@beyondourborders.cloud" style="text-decoration:underline">hello@beyondourborders.cloud</a></div></div>
+          <div class="row" style="gap:var(--sp-2)">
+            <a class="icon-btn" href="https://github.com/BOB-AI-Rook" style="border-color:rgba(245,239,227,.4);color:var(--bob-bone)" aria-label="GitHub"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-github"/></svg></a>
+            <a class="icon-btn" href="#" style="border-color:rgba(245,239,227,.4);color:var(--bob-bone)" aria-label="Discord"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-discord"/></svg></a>
+            <a class="icon-btn" href="#" style="border-color:rgba(245,239,227,.4);color:var(--bob-bone)" aria-label="LinkedIn"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-linkedin"/></svg></a>
+          </div>
+        </div>
+        <svg class="deco" style="right:-8px;top:-34px;width:118px;stroke:var(--bob-cream);opacity:.4" viewBox="0 0 240 240" fill="none" stroke-width="1.2" aria-hidden="true"><ellipse cx="120" cy="120" rx="115" ry="46" transform="rotate(-28 120 120)"/><ellipse cx="120" cy="120" rx="92" ry="92"/><ellipse cx="120" cy="120" rx="115" ry="46" transform="rotate(32 120 120)"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="panel panel--ink on-dark">
+  <div class="foot">
+    <div>
+      <span class="nav__logo nav__logo--lg">
+        <svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-starburst"/></svg>
+        <span class="mark"><b>BOB</b><small>Beyond Our Borders</small></span>
+      </span>
+      <p class="muted-invert" style="font-size:var(--fs-sm);margin:var(--sp-4) 0 0;max-width:30ch">Built on the HERMES agent system.</p>
+    </div>
+    <div><span class="label" style="color:var(--accent)">Navigation</span>
+      <div class="linklist" style="margin-top:var(--sp-4)">
+        <a href="#main">Home</a><a href="#about">About</a><a href="#features">Features</a>
+        <a href="#system">System</a><a href="#work">Work</a><a href="#contact">Contact</a></div></div>
+    <div><span class="label" style="color:var(--accent)">Capabilities</span>
+      <div class="linklist" style="margin-top:var(--sp-4)">
+        <a href="#features">Multi-Agent Orchestration</a><a href="#features">Workflow Automation</a>
+        <a href="#features">Knowledge &amp; RAG</a><a href="#features">System Integrations</a></div></div>
+    <div><span class="label" style="color:var(--accent)">Info</span>
+      <div class="linklist" style="margin-top:var(--sp-4)">
+        <a href="mailto:hello@beyondourborders.cloud">hello@beyondourborders.cloud</a>
+        <a href="#">Privacy</a><a href="#">Imprint</a>
+        <span class="muted-invert">© 2026 BOB. Built on the HERMES agent system.</span></div></div>
+  </div>
+</footer>
+
+</div>
+
+<!-- ============================ COOKIE NOTICE ============================ -->
+<div class="cookie" id="cookie" hidden>
+  <p>This website uses only technically necessary cookies to ensure basic functionality.</p>
+  <button class="btn btn--primary" id="cookieOk">Got it<span class="btn__dot"><svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-check"/></svg></span></button>
+</div>
+
+<script>
+// Mobile-Navigation
+(function () {
+  var t = document.getElementById('navToggle'), m = document.getElementById('navMobile');
+  if (!t || !m) return;
+  t.addEventListener('click', function () {
+    var open = t.getAttribute('aria-expanded') === 'true';
+    t.setAttribute('aria-expanded', String(!open));
+    t.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+    m.hidden = open;
+  });
+  m.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { m.hidden = true; t.setAttribute('aria-expanded', 'false'); }
+  });
+})();
+
+// Cookie-Hinweis — nur technisch notwendige Cookies, daher reine Kenntnisnahme.
+(function () {
+  var box = document.getElementById('cookie'), ok = document.getElementById('cookieOk');
+  if (!box || !ok) return;
+  var seen = false;
+  try { seen = localStorage.getItem('bob.cookie.ack') === '1'; } catch (e) {}
+  if (!seen) box.hidden = false;
+  ok.addEventListener('click', function () {
+    box.hidden = true;
+    try { localStorage.setItem('bob.cookie.ack', '1'); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>

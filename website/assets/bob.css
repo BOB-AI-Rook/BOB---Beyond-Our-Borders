@@ -16,6 +16,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 img, svg { max-width: 100%; display: block; }
+/* Muss nach den display-Regeln stehen: eine Komponente mit eigenem
+   display (grid/flex) schlaegt sonst das hidden-Attribut. */
+[hidden] { display: none !important; }
 a { color: inherit; text-decoration: none; }
 button, input, textarea, select { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--r-sm); }
@@ -344,3 +347,84 @@ textarea.input { border-radius: var(--r-md); min-height: 120px; resize: vertical
    nicht bei jeder Komponente einzeln beachtet werden muss. */
 .on-dark, .panel--ink, .panel--olive { --accent: var(--bob-rust-soft); }
 .panel--rust { --accent: var(--bob-cream); }
+
+/* ==========================================================================
+   PRODUKTIONS-KOMPONENTEN
+   Ergänzungen, die eine echte Seite braucht und die statische Demo nicht.
+   ========================================================================== */
+
+/* ---- SKIP LINK ----------------------------------------------------------- */
+.skip {
+  position: absolute; left: -9999px; top: var(--sp-2); z-index: 10000;
+  background: var(--surface-ink); color: var(--text-invert);
+  padding: 10px 20px; border-radius: var(--r-pill);
+  font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 700;
+  text-transform: uppercase; letter-spacing: var(--tr-label);
+}
+.skip:focus { left: var(--gutter); }
+
+/* ---- MOBILE NAV ---------------------------------------------------------- */
+.nav__toggle { display: none; }
+.nav__mobile {
+  margin-top: var(--sp-3); background: var(--surface-ink); color: var(--text-invert);
+  border-radius: var(--r-lg); padding: var(--sp-5); display: grid; gap: var(--sp-4);
+}
+.nav__mobile a {
+  font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 700;
+  text-transform: uppercase; letter-spacing: var(--tr-label); color: var(--text-invert-muted);
+}
+.nav__mobile a:hover, .nav__mobile a:focus-visible { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .nav__toggle { display: grid; }
+  .nav { padding-right: 10px; }
+  .nav .btn { display: none; }
+}
+
+/* ---- METRIC BLOCK — Architektur-Komponente ------------------------------- */
+.metric { display: grid; gap: var(--sp-2); }
+.metric__head { display: flex; align-items: baseline; gap: var(--sp-3); flex-wrap: wrap; }
+.metric__idx {
+  font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 700;
+  letter-spacing: var(--tr-label); color: var(--text-invert-muted);
+}
+.metric__name { font-family: var(--font-display); text-transform: uppercase;
+                font-size: 1.25rem; line-height: 1; letter-spacing: .01em; }
+.metric__value {
+  font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 700;
+  text-transform: uppercase; letter-spacing: var(--tr-label); color: var(--accent);
+  padding: 4px 12px; border-radius: var(--r-pill); border: 1px solid currentColor;
+}
+.metric__title { font-size: var(--fs-sm); font-weight: 700; }
+.metric p { margin: 0; font-size: var(--fs-sm); color: var(--text-invert-muted); max-width: 46ch; }
+
+/* ---- STEP FLOW — Understand → Route → Execute → Deliver ------------------ */
+.flow { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; }
+.flow__step { display: flex; align-items: center; gap: var(--sp-3); }
+.flow__n {
+  width: 26px; height: 26px; border-radius: var(--r-pill); flex: none;
+  display: grid; place-items: center; background: var(--accent); color: var(--bob-ink);
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+}
+.flow__label { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 700;
+               text-transform: uppercase; letter-spacing: var(--tr-label); }
+.flow__arrow { color: var(--accent); opacity: .6; }
+.flow__arrow svg { width: 16px; height: 16px; }
+
+/* ---- COOKIE NOTICE ------------------------------------------------------- */
+.cookie {
+  position: fixed; left: var(--gutter); right: var(--gutter);
+  bottom: calc(var(--sp-4) + env(safe-area-inset-bottom, 0px)); z-index: 500;
+  max-width: 560px; margin-inline: auto;
+  background: var(--surface-ink); color: var(--text-invert);
+  border-radius: var(--r-lg); padding: var(--sp-4) var(--sp-5);
+  display: flex; align-items: center; gap: var(--sp-4); flex-wrap: wrap;
+  box-shadow: var(--shadow-lift);
+}
+.cookie p { margin: 0; flex: 1; min-width: 200px; font-size: var(--fs-sm); color: var(--text-invert-muted); }
+
+/* ---- SCROLL-IN — sichtbarer Ruhezustand, Animation nur als Zugabe -------- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { animation: bob-reveal var(--dur-slow) var(--ease) both; }
+  @keyframes bob-reveal { from { opacity: .001; transform: translateY(10px); } }
+}

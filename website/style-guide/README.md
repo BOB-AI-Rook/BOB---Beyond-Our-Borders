@@ -6,11 +6,11 @@ Der Guide ist selbst in seinem eigenen Design gebaut — er ist kein Screenshot-
 sondern lauffähiger Code. Was im Guide zu sehen ist, ist genau das, was die Website ausliefert.
 
 ```
-website/style-guide/
-├── index.html              # Der Style Guide (im Browser öffnen)
-├── assets/
+website/
+├── assets/                 # gemeinsam genutzt von Style Guide und Website
 │   ├── tokens.css          # Design Tokens — einzige Quelle der Wahrheit
 │   ├── bob.css             # Komponentenbibliothek — produktionsreif
+│   ├── favicon.svg
 │   ├── fonts/              # Selbstgehostete Webfonts + fonts.css
 │   ├── icons/
 │   │   ├── sprite.svg      # 25 Icons als SVG-Sprite
@@ -18,17 +18,19 @@ website/style-guide/
 │   │   ├── orbit-ring.svg  # Ornament: Orbit
 │   │   └── wireframe-terrain.svg
 │   └── img/                # 11 Motive, WebP, alle aus einem Prompt
-└── README.md
+├── style-guide/index.html  # Der Style Guide (dieses Dokument)
+└── v2/index.html           # Die neue Website
 ```
 
 ## Ansehen
 
 ```bash
-cd website/style-guide && python3 -m http.server 8080
-# → http://localhost:8080
+cd website && python3 -m http.server 8080
+# Style Guide → http://localhost:8080/style-guide/
+# Website    → http://localhost:8080/v2/
 ```
 
-Über `file://` fehlen wegen CORS die Schriften — immer über einen Server öffnen.
+Über `file://` fehlen wegen CORS die Schriften und das Icon-Sprite — immer über einen Server öffnen.
 
 ## In die Website einbinden
 
