@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BOB — Style Guide</title>
+<link rel="preload" href="assets/fonts/anton-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/space-grotesk-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/bob.css">
+<style>
+  /* ---- Style-Guide-Chrome: nur für dieses Dokument, nicht für die Website ---- */
+  body { padding-bottom: var(--sp-10); }
+  .sg-top { padding: var(--sp-5) 0 var(--sp-7); }
+  .sg-sec { padding: var(--sp-8) 0; border-top: 1px solid var(--line); }
+  .sg-sec:first-of-type { border-top: 0; }
+  .sg-num { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 700;
+            letter-spacing: var(--tr-label); color: var(--accent); }
+  .sg-note { font-size: var(--fs-sm); color: var(--text-muted); max-width: 62ch; }
+  .sg-demo { background: var(--surface-sunk); border: 1px solid var(--line);
+             border-radius: var(--r-lg); padding: clamp(20px,3vw,36px); margin-top: var(--sp-5); }
+  .sg-demo--ink   { background: var(--bob-ink);   border-color: transparent; color: var(--text-invert); }
+  .sg-demo--olive { background: var(--bob-olive); border-color: transparent; color: var(--text-invert); }
+  .sg-demo--plain { background: transparent; border-style: dashed; }
+  code, .mono { font-family: var(--font-mono); font-size: var(--fs-sm); }
+  code { background: rgba(23,19,16,.06); padding: 2px 6px; border-radius: 5px; }
+  .on-dark code { background: rgba(245,239,227,.12); }
+  .sg-cols { display: grid; gap: var(--sp-5); }
+  .c2 { grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+  .c3 { grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); }
+  .c4 { grid-template-columns: repeat(auto-fit, minmax(170px,1fr)); }
+
+  /* Farb-Swatch */
+  .sw { border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line); }
+  .sw__chip { height: 92px; }
+  .sw__meta { background: var(--surface); padding: 10px 12px; display: grid; gap: 1px; }
+  .sw__name { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .sw__hex  { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted); }
+
+  /* Icon-Raster */
+  .ico-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px,1fr)); gap: var(--sp-3); }
+  .ico { display: grid; place-items: center; gap: 8px; padding: 16px 8px;
+         background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); text-align: center; }
+  .ico svg { width: 26px; height: 26px; color: var(--bob-ink); }
+  .ico span { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em;
+              text-transform: uppercase; color: var(--text-muted); word-break: break-word; }
+
+  /* Do / Don't */
+  .rule-card { border-radius: var(--r-md); padding: var(--sp-4); border-left: 3px solid; background: var(--surface); }
+  .rule-card.do   { border-color: var(--ok); }
+  .rule-card.dont { border-color: var(--danger); }
+  .rule-card h4 { margin: 0 0 6px; font-family: var(--font-mono); font-size: var(--fs-xs);
+                  letter-spacing: var(--tr-label); text-transform: uppercase; }
+  .rule-card.do h4   { color: var(--ok); }
+  .rule-card.dont h4 { color: var(--danger); }
+  .rule-card p { margin: 0; font-size: var(--fs-sm); color: var(--text-muted); }
+
+  .spec { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+  .spec th, .spec td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .spec th { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: var(--tr-label);
+             text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
+  .spec td:first-child { font-family: var(--font-mono); white-space: nowrap; }
+  .table-scroll { overflow-x: auto; }
+
+  .type-row { padding: var(--sp-4) 0; border-bottom: 1px solid var(--line); }
+  .type-row:last-child { border-bottom: 0; }
+  .type-meta { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .08em;
+               text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+
+  .space-bar { background: var(--accent); height: 14px; border-radius: 3px; }
+</style>
+</head>
+<body class="bob-grain">
+
+<!-- ===== ICON-SPRITE (inline eingebettet, damit file:// funktioniert) ===== -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-orchestration" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="2.25"/><circle cx="4.75" cy="19" r="2.25"/><circle cx="19.25" cy="19" r="2.25"/><path d="M10.6 6.4 6.2 16.9M13.4 6.4l4.4 10.5M7 19h10"/></symbol>
+  <symbol id="i-automation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 3.5V7h-3.5"/><circle cx="12" cy="12" r="2.5"/></symbol>
+  <symbol id="i-knowledge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v13H5.5A1.5 1.5 0 0 0 4 18.5Z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v13h5.5a1.5 1.5 0 0 1 1.5 1.5Z"/><path d="M12 17v3"/></symbol>
+  <symbol id="i-integrations" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 4.5 4 12l4.5 7.5M15.5 4.5 20 12l-4.5 7.5"/><circle cx="12" cy="12" r="1.6"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5c.7 5.2 4.6 9.1 9.8 9.8v1.4c-5.2.7-9.1 4.6-9.8 9.8h-1.4C10 17.3 6.1 13.4.9 12.7v-1.4C6.1 10.6 10 6.7 10.6 1.5Z"/></symbol>
+  <symbol id="i-starburst" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.5 13.3 9 20 4.3 15.3 11l8.5 1-8.5 1 4.7 6.7L13.3 15 12 23.5 10.7 15 4 19.7 8.7 13 .2 12l8.5-1L4 4.3 10.7 9Z"/></symbol>
+  <symbol id="i-globe-wire" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M4.6 6.8h14.8M4.6 17.2h14.8"/></symbol>
+  <symbol id="i-orbit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><ellipse cx="12" cy="12" rx="10.5" ry="4.5" transform="rotate(-24 12 12)"/><circle cx="21" cy="8.2" r="1.5" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-arrow-ne" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 17.5 17.5 6.5M8.5 6.5h9v9"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 5.6 19 12 8.5 18.4Z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5 12 15.5 18 9.5"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5S4.75 15 4.75 9.75a7.25 7.25 0 0 1 14.5 0C19.25 15 12 21.5 12 21.5Z"/><circle cx="12" cy="9.75" r="2.6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.4 2"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 2.5 5 13.5h6L10.5 21.5 19 10.5h-6Z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4.5 5.8v6c0 4.6 3.1 8.4 7.5 9.7 4.4-1.3 7.5-5.1 7.5-9.7v-6Z"/><path d="M9 12.2 11.3 14.5 15.5 10"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 12S5.6 5.5 12 5.5 22.2 12 22.2 12 18.4 18.5 12 18.5 1.8 12 1.8 12Z"/><circle cx="12" cy="12" r="3.1"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.75" y="4.25" width="18.5" height="15.5" rx="2.25"/><path d="M7 9.5 10 12.5 7 15.5M12.5 15.5h4.5"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.75" y="5" width="18.5" height="14" rx="2.25"/><path d="M3.5 7 12 13 20.5 7"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.8a10.2 10.2 0 0 0-3.2 19.9c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.7-1.4-2.3-.3-4.7-1.1-4.7-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7 1 .7 2v2.9c0 .3.2.6.7.5A10.2 10.2 0 0 0 12 1.8Z"/></symbol>
+  <symbol id="i-discord" viewBox="0 0 24 24" fill="currentColor"><path d="M19.3 5.4A16 16 0 0 0 15.3 4l-.3.6a14.9 14.9 0 0 0-6 0L8.7 4a16 16 0 0 0-4 1.4C2.2 9.1 1.5 12.7 1.9 16.2A16.1 16.1 0 0 0 6.7 20l1-1.7a10.5 10.5 0 0 1-1.6-.8l.4-.3a11.5 11.5 0 0 0 11 0l.4.3c-.5.3-1 .6-1.6.8l1 1.7a16 16 0 0 0 4.8-3.8c.5-4.1-.6-7.7-2.8-10.8ZM8.6 14.2c-1 0-1.7-.9-1.7-2s.8-2 1.7-2 1.8.9 1.7 2c0 1.1-.8 2-1.7 2Zm6.8 0c-1 0-1.7-.9-1.7-2s.8-2 1.7-2 1.8.9 1.7 2c0 1.1-.7 2-1.7 2Z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9.75h4v11H3ZM9.5 9.75h3.8v1.5a4.2 4.2 0 0 1 3.7-1.9c3 0 4 2 4 5.2v6.2h-4v-5.5c0-1.6-.6-2.6-2-2.6s-2.2 1-2.2 2.6v5.5h-3.3Z"/></symbol>
+</svg>
+
+<div class="wrap">
+
+<!-- ===================== KOPF ===================== -->
+<header class="sg-top">
+  <nav class="nav" aria-label="Style-Guide-Navigation">
+    <div class="nav__logo">
+      <svg aria-hidden="true"><use href="#i-starburst"/></svg>
+      <div class="mark"><b>BOB</b><small>Beyond Our Borders</small></div>
+    </div>
+    <div class="nav__links">
+      <a href="#farben">Farben</a><a href="#typo">Typografie</a><a href="#icons">Icons</a>
+      <a href="#bilder">Bildwelt</a><a href="#komponenten">Komponenten</a><a href="#muster">Muster</a><a href="#regeln">Regeln</a>
+    </div>
+    <a class="btn btn--primary" href="#muster">Live-Muster<span class="btn__dot"><svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span></a>
+  </nav>
+</header>
+
+<section class="sg-sec" style="border-top:0">
+  <span class="chip"><svg aria-hidden="true"><use href="#i-sparkle"/></svg> Style Guide · Version 1.0 · Retro-Futurism</span>
+  <h1 class="d1" style="margin:var(--sp-5) 0 var(--sp-4)">DAS<br><span class="d-accent">BOB</span> DESIGN<br>SYSTEM</h1>
+  <p class="lead">Ein Retro-Futurism-System für <strong>Beyond Our Borders</strong>: warme Druckfarben, brutale
+  Display-Typografie, geometrische Strichgrafik und Filmkorn. Jede Regel unten ist bindend — sie ist der
+  Unterschied zwischen „sieht retro aus“ und „ist ein System“.</p>
+  <div class="row" style="margin-top:var(--sp-6)">
+    <span class="chip chip--rust">Terracotta + Creme + Olive</span>
+    <span class="chip">Anton · Space Grotesk · Space Mono</span>
+    <span class="chip">Pill-Radien + Rounded-Slabs</span>
+    <span class="chip">Korn immer an</span>
+  </div>
+</section>
+
+<!-- ===================== 01 · PRINZIPIEN ===================== -->
+<section class="sg-sec" id="prinzipien">
+  <div class="section-head"><span class="sg-num">01</span><span class="chip chip--ghost">Prinzipien</span><span class="rule"></span></div>
+  <div class="sg-cols c4">
+    <div class="card"><div class="badge-icon"><svg aria-hidden="true"><use href="#i-sparkle"/></svg></div>
+      <h3 class="d4">Warm, nicht kalt</h3><p>Kein Reinweiß, kein Reinschwarz. Jede Fläche hat Papierton. Creme statt #FFF, Tinte statt #000.</p></div>
+    <div class="card"><div class="badge-icon badge-icon--olive"><svg aria-hidden="true"><use href="#i-orchestration"/></svg></div>
+      <h3 class="d4">Geometrie als Sprache</h3><p>Kreise, Bögen, 45°-Diagonalen, Drahtgitter. Keine organischen Formen, keine Verläufe als Dekor.</p></div>
+    <div class="card"><div class="badge-icon badge-icon--ink"><svg aria-hidden="true"><use href="#i-terminal"/></svg></div>
+      <h3 class="d4">Laut oben, leise unten</h3><p>Display schreit in Versalien. Fließtext bleibt klein, ruhig und in Satzform. Nie beides gleichzeitig laut.</p></div>
+    <div class="card"><div class="badge-icon badge-icon--cream"><svg aria-hidden="true"><use href="#i-globe-wire"/></svg></div>
+      <h3 class="d4">Gedruckt, nicht gerendert</h3><p>Korn, Halbton, Risograph-Fehlpassung. Die Oberfläche soll wie Papier von 1974 wirken.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 02 · FARBEN ===================== -->
+<section class="sg-sec" id="farben">
+  <div class="section-head"><span class="sg-num">02</span><span class="chip chip--ghost">Farbpalette</span><span class="rule"></span></div>
+  <p class="sg-note">Vier Grundflächen, ein Akzent. Mehr Farben gibt es nicht — Abstufungen entstehen über Fläche
+  und Kontrast, nicht über neue Töne.</p>
+
+  <div class="sg-cols c4" style="margin-top:var(--sp-5)">
+    <div class="sw"><div class="sw__chip" style="background:#F7F1E6"></div><div class="sw__meta"><span class="sw__name">Cream</span><span class="sw__hex">#F7F1E6 · --bob-cream</span><span class="sw__hex">Seitengrund</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#C2522F"></div><div class="sw__meta"><span class="sw__name">Rust</span><span class="sw__hex">#C2522F · --bob-rust</span><span class="sw__hex">Akzent · CTA</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#54562E"></div><div class="sw__meta"><span class="sw__name">Olive</span><span class="sw__hex">#54562E · --bob-olive</span><span class="sw__hex">Sekundärfläche</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#171310"></div><div class="sw__meta"><span class="sw__name">Ink</span><span class="sw__hex">#171310 · --bob-ink</span><span class="sw__hex">Dunkle Panels</span></div></div>
+  </div>
+
+  <div class="sg-cols c4" style="margin-top:var(--sp-4)">
+    <div class="sw"><div class="sw__chip" style="background:#EFE6D6;height:56px"></div><div class="sw__meta"><span class="sw__name">Cream Deep</span><span class="sw__hex">#EFE6D6</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#E3D6BC;height:56px"></div><div class="sw__meta"><span class="sw__name">Sand</span><span class="sw__hex">#E3D6BC</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#A5401F;height:56px"></div><div class="sw__meta"><span class="sw__name">Rust Deep</span><span class="sw__hex">#A5401F</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#D9764F;height:56px"></div><div class="sw__meta"><span class="sw__name">Rust Soft</span><span class="sw__hex">#D9764F</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#3E4022;height:56px"></div><div class="sw__meta"><span class="sw__name">Olive Deep</span><span class="sw__hex">#3E4022</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#6E7040;height:56px"></div><div class="sw__meta"><span class="sw__name">Olive Soft</span><span class="sw__hex">#6E7040</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#2A231D;height:56px"></div><div class="sw__meta"><span class="sw__name">Ink Soft</span><span class="sw__hex">#2A231D</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#F5EFE3;height:56px"></div><div class="sw__meta"><span class="sw__name">Bone</span><span class="sw__hex">#F5EFE3</span></div></div>
+  </div>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-3)">Flächenverteilung — die 60/25/10/5-Regel</h3>
+  <div style="display:flex;border-radius:var(--r-md);overflow:hidden;height:52px;border:1px solid var(--line)">
+    <div style="flex:60;background:#F7F1E6"></div><div style="flex:25;background:#171310"></div>
+    <div style="flex:10;background:#54562E"></div><div style="flex:5;background:#C2522F"></div>
+  </div>
+  <p class="sg-note" style="margin-top:var(--sp-3)"><strong>60 % Creme</strong> (Grund) · <strong>25 % Ink</strong>
+  (dunkle Panels) · <strong>10 % Olive</strong> (ein bis zwei Panels pro Seite) · <strong>5 % Rust</strong>.
+  Rust ist Akzent, kein Hintergrund — die einzige Ausnahme ist das Final-CTA-Panel.</p>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-3)">Kontrast &amp; Barrierefreiheit</h3>
+  <div class="table-scroll"><table class="spec">
+    <thead><tr><th>Kombination</th><th>Ratio</th><th>Status</th><th>Erlaubt für</th></tr></thead>
+    <tbody>
+      <tr><td>Ink auf Cream</td><td>14.8:1</td><td>AAA</td><td>Alles</td></tr>
+      <tr><td>Bone auf Ink</td><td>13.9:1</td><td>AAA</td><td>Alles</td></tr>
+      <tr><td>Bone auf Olive</td><td>7.4:1</td><td>AAA</td><td>Alles</td></tr>
+      <tr><td>Bone auf Rust</td><td>5.2:1</td><td>AA</td><td>Alles ab 16 px</td></tr>
+      <tr><td>Rust auf Cream</td><td>4.6:1</td><td>AA</td><td>Fließtext ab 16 px, Display, Icons</td></tr>
+      <tr><td>Rust Soft auf Ink</td><td>6.1:1</td><td>AA+</td><td>Akzent auf dunklen Panels — <em>immer</em> statt Rust</td></tr>
+      <tr><td>Olive auf Cream</td><td>6.9:1</td><td>AA+</td><td>Text, Rahmen</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sg-note" style="margin-top:var(--sp-3)">Auf Ink und Olive nie <code>--bob-rust</code> für Text verwenden —
+  dort gilt <code>--bob-rust-soft</code>. Genau dafür existiert der Ton.</p>
+</section>
+
+<!-- ===================== 03 · TYPOGRAFIE ===================== -->
+<section class="sg-sec" id="typo">
+  <div class="section-head"><span class="sg-num">03</span><span class="chip chip--ghost">Typografie</span><span class="rule"></span></div>
+  <p class="sg-note">Vier Schriften mit vier klar getrennten Aufgaben. Keine Schrift übernimmt die Rolle einer anderen.</p>
+
+  <div class="sg-cols c4" style="margin-top:var(--sp-5)">
+    <div class="card"><span class="label" style="color:var(--accent)">Display</span><div style="font-family:var(--font-display);font-size:2.5rem;line-height:.9;text-transform:uppercase">Anton</div><p>Headlines, Zahlen, Logo, Kartentitel. <strong>Immer Versalien</strong>, Laufweite −0.02 em, Zeilenhöhe 0.88.</p></div>
+    <div class="card"><span class="label" style="color:var(--accent)">Fließtext</span><div style="font-family:var(--font-body);font-size:2.25rem;font-weight:500">Space Grotesk</div><p>Absätze, Lead, Karteninhalt. Gemischt-schrift, 400/500/700, Zeilenhöhe 1.6.</p></div>
+    <div class="card"><span class="label" style="color:var(--accent)">Label</span><div style="font-family:var(--font-mono);font-size:1.5rem;font-weight:700;text-transform:uppercase">Space Mono</div><p>Eyebrows, Buttons, Nav, Metadaten, Tabellenköpfe. Immer Versalien, Laufweite +0.16 em.</p></div>
+    <div class="card"><span class="label" style="color:var(--accent)">Signatur</span><div style="font-family:var(--font-script);font-size:2.75rem;line-height:1">Beyond</div><p>Parisienne. <strong>Maximal einmal pro Seite</strong> — als Signatur-Ornament, nie als Headline oder Label.</p></div>
+  </div>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-4)">Skala</h3>
+  <div class="sg-demo">
+    <div class="type-row"><div class="type-meta">D1 · clamp(3.25rem → 7rem) · Anton · LH 0.88 · TR −0.02em</div><div class="d1">AGENTIC AI</div></div>
+    <div class="type-row"><div class="type-meta">D2 · clamp(2.5rem → 4.25rem)</div><div class="d2">GETS THINGS DONE</div></div>
+    <div class="type-row"><div class="type-meta">D3 · clamp(1.75rem → 2.5rem) · Panel-Titel</div><div class="d3">HERMES Orchestrierung</div></div>
+    <div class="type-row"><div class="type-meta">D4 · clamp(1.25rem → 1.6rem) · Kartentitel</div><div class="d4">Vector Flash</div></div>
+    <div class="type-row"><div class="type-meta">Lead · 18px · LH 1.55 · max. 52 Zeichen</div><div class="lead">BOB vereint Multi-Agent-Orchestrierung mit Echtzeit-Wissensabruf und Workflow-Automatisierung.</div></div>
+    <div class="type-row"><div class="type-meta">Body · 15px · LH 1.6</div><div>Der Orchestrator zerlegt Anfragen in Teilaufgaben und verteilt sie parallel oder sequenziell an spezialisierte Agents.</div></div>
+    <div class="type-row"><div class="type-meta">Small · 13px — Kartentext, Meta</div><div style="font-size:var(--fs-sm);color:var(--text-muted)">Antwortet mit Quellenangaben, geerdet in deinen Dokumenten.</div></div>
+    <div class="type-row"><div class="type-meta">Label · 11px · Space Mono · TR +0.16em</div><div class="label">WAS BOB KANN</div></div>
+  </div>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-3)">Headline-Bauweise</h3>
+  <div class="sg-demo sg-demo--plain">
+    <h2 class="d2">ICH BAUE<br><span class="d-accent">SYSTEME DIE</span><br>WIRKLICH LIEFERN</h2>
+  </div>
+  <p class="sg-note" style="margin-top:var(--sp-3)">Regel: 2–4 Zeilen, harte Umbrüche per <code>&lt;br&gt;</code>,
+  <strong>genau eine</strong> Zeile in Rust. Nie das erste und letzte Wort einfärben, nie mehr als eine Zeile.</p>
+</section>
+
+<!-- ===================== 04 · RASTER & ABSTAND ===================== -->
+<section class="sg-sec" id="raster">
+  <div class="section-head"><span class="sg-num">04</span><span class="chip chip--ghost">Raster &amp; Abstand</span><span class="rule"></span></div>
+  <div class="sg-cols c2">
+    <div>
+      <h3 class="d4" style="margin:0 0 var(--sp-4)">Abstandsskala — 4px-Basis</h3>
+      <div class="stack">
+        <div><div class="type-meta">sp-1 · 4px — Icon zu Icon</div><div class="space-bar" style="width:4px"></div></div>
+        <div><div class="type-meta">sp-2 · 8px — Label zu Wert</div><div class="space-bar" style="width:8px"></div></div>
+        <div><div class="type-meta">sp-3 · 12px — Inline-Gruppe</div><div class="space-bar" style="width:12px"></div></div>
+        <div><div class="type-meta">sp-4 · 16px — Text-Block</div><div class="space-bar" style="width:16px"></div></div>
+        <div><div class="type-meta">sp-5 · 24px — Karten-Padding, Grid-Gap</div><div class="space-bar" style="width:24px"></div></div>
+        <div><div class="type-meta">sp-6 · 32px — Kopf zu Inhalt</div><div class="space-bar" style="width:32px"></div></div>
+        <div><div class="type-meta">sp-7 · 48px — Panel-Padding</div><div class="space-bar" style="width:48px"></div></div>
+        <div><div class="type-meta">sp-8 · 64px — Sektionsabstand mobil</div><div class="space-bar" style="width:64px"></div></div>
+        <div><div class="type-meta">sp-9 · 96px — Sektionsabstand Desktop</div><div class="space-bar" style="width:96px"></div></div>
+      </div>
+    </div>
+    <div>
+      <h3 class="d4" style="margin:0 0 var(--sp-4)">Radien — die Hausform</h3>
+      <div class="sg-cols c2">
+        <div class="sg-demo sg-demo--plain" style="margin:0;text-align:center"><div style="height:56px;background:var(--accent);border-radius:8px;margin-bottom:8px"></div><span class="label">8px · Tag</span></div>
+        <div class="sg-demo sg-demo--plain" style="margin:0;text-align:center"><div style="height:56px;background:var(--accent);border-radius:14px;margin-bottom:8px"></div><span class="label">14px · Bild</span></div>
+        <div class="sg-demo sg-demo--plain" style="margin:0;text-align:center"><div style="height:56px;background:var(--accent);border-radius:22px;margin-bottom:8px"></div><span class="label">22px · Karte</span></div>
+        <div class="sg-demo sg-demo--plain" style="margin:0;text-align:center"><div style="height:56px;background:var(--accent);border-radius:32px;margin-bottom:8px"></div><span class="label">32px · Panel</span></div>
+      </div>
+      <div class="sg-demo sg-demo--plain" style="text-align:center"><div style="height:56px;background:var(--accent);border-radius:999px;margin-bottom:8px"></div><span class="label">999px · Pill — Button, Chip, Input, Nav</span></div>
+      <p class="sg-note" style="margin-top:var(--sp-4)">12-Spalten-Raster, Gap 24px, max. 1200px, Gutter
+      <code>clamp(16px, 4vw, 40px)</code>. Bei ≤900px auf 6 Spalten, bei ≤560px auf 2.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 05 · ICONS ===================== -->
+<section class="sg-sec" id="icons">
+  <div class="section-head"><span class="sg-num">05</span><span class="chip chip--ghost">Icon-Set</span><span class="rule"></span></div>
+  <p class="sg-note">25 Icons, eigens für BOB gezeichnet. 24×24-Raster, Strichstärke 1.75, runde Enden und Ecken.
+  Nur Kreise, Bögen und 45°-Diagonalen. Ornamente (Sparkle, Starburst, Globe, Orbit) sind flächig gefüllt,
+  alles andere ist Strich.</p>
+  <div class="sg-demo">
+    <div class="ico-grid">
+      <div class="ico"><svg><use href="#i-orchestration"/></svg><span>orchestration</span></div>
+      <div class="ico"><svg><use href="#i-automation"/></svg><span>automation</span></div>
+      <div class="ico"><svg><use href="#i-knowledge"/></svg><span>knowledge</span></div>
+      <div class="ico"><svg><use href="#i-integrations"/></svg><span>integrations</span></div>
+      <div class="ico"><svg><use href="#i-sparkle"/></svg><span>sparkle</span></div>
+      <div class="ico"><svg><use href="#i-starburst"/></svg><span>starburst</span></div>
+      <div class="ico"><svg><use href="#i-globe-wire"/></svg><span>globe-wire</span></div>
+      <div class="ico"><svg><use href="#i-orbit"/></svg><span>orbit</span></div>
+      <div class="ico"><svg><use href="#i-arrow-right"/></svg><span>arrow-right</span></div>
+      <div class="ico"><svg><use href="#i-arrow-ne"/></svg><span>arrow-ne</span></div>
+      <div class="ico"><svg><use href="#i-play"/></svg><span>play</span></div>
+      <div class="ico"><svg><use href="#i-plus"/></svg><span>plus</span></div>
+      <div class="ico"><svg><use href="#i-check"/></svg><span>check</span></div>
+      <div class="ico"><svg><use href="#i-chevron-down"/></svg><span>chevron-down</span></div>
+      <div class="ico"><svg><use href="#i-close"/></svg><span>close</span></div>
+      <div class="ico"><svg><use href="#i-pin"/></svg><span>pin</span></div>
+      <div class="ico"><svg><use href="#i-clock"/></svg><span>clock</span></div>
+      <div class="ico"><svg><use href="#i-bolt"/></svg><span>bolt</span></div>
+      <div class="ico"><svg><use href="#i-shield"/></svg><span>shield</span></div>
+      <div class="ico"><svg><use href="#i-eye"/></svg><span>eye</span></div>
+      <div class="ico"><svg><use href="#i-terminal"/></svg><span>terminal</span></div>
+      <div class="ico"><svg><use href="#i-mail"/></svg><span>mail</span></div>
+      <div class="ico"><svg><use href="#i-github"/></svg><span>github</span></div>
+      <div class="ico"><svg><use href="#i-discord"/></svg><span>discord</span></div>
+      <div class="ico"><svg><use href="#i-linkedin"/></svg><span>linkedin</span></div>
+    </div>
+  </div>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-3)">Icon-Container</h3>
+  <div class="sg-demo"><div class="row" style="gap:var(--sp-5)">
+    <div style="text-align:center"><div class="badge-icon"><svg><use href="#i-orchestration"/></svg></div><span class="label" style="display:block;margin-top:8px">Rust</span></div>
+    <div style="text-align:center"><div class="badge-icon badge-icon--olive"><svg><use href="#i-automation"/></svg></div><span class="label" style="display:block;margin-top:8px">Olive</span></div>
+    <div style="text-align:center"><div class="badge-icon badge-icon--ink"><svg><use href="#i-knowledge"/></svg></div><span class="label" style="display:block;margin-top:8px">Ink</span></div>
+    <div style="text-align:center"><div class="badge-icon badge-icon--cream"><svg><use href="#i-integrations"/></svg></div><span class="label" style="display:block;margin-top:8px">Cream</span></div>
+    <div style="text-align:center"><span class="icon-btn"><svg><use href="#i-arrow-ne"/></svg></span><span class="label" style="display:block;margin-top:8px">Outline</span></div>
+    <div style="text-align:center"><span class="icon-btn icon-btn--filled"><svg><use href="#i-arrow-right"/></svg></span><span class="label" style="display:block;margin-top:8px">Gefüllt</span></div>
+  </div></div>
+  <p class="sg-note" style="margin-top:var(--sp-3)">Badge-Farben rotieren in Kartenreihen fest in der Folge
+  <strong>Rust → Olive → Ink → Rust</strong>. Radius 18px auf 54px — nie ein Kreis, nie ein Quadrat.</p>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-3)">Ornamente</h3>
+  <div class="sg-demo sg-demo--ink on-dark">
+    <div class="row" style="gap:var(--sp-7);justify-content:center">
+      <svg width="88" height="88" viewBox="0 0 120 120" fill="none" stroke="#D9764F" stroke-width="1.4" stroke-linecap="round"><path d="M60 4V44M60 76V116M4 60H44M76 60H116"/><path d="M20 20 46 46M74 74 100 100M100 20 74 46M46 74 20 100" opacity=".75"/><path d="M60 26V94M26 60H94" opacity=".35"/><circle cx="60" cy="60" r="4" fill="#D9764F" stroke="none"/></svg>
+      <svg width="88" height="88" viewBox="0 0 240 240" fill="none" stroke="#D9764F" stroke-width="1.6"><ellipse cx="120" cy="120" rx="115" ry="46" transform="rotate(-28 120 120)"/><ellipse cx="120" cy="120" rx="92" ry="92"/><ellipse cx="120" cy="120" rx="115" ry="46" transform="rotate(32 120 120)" opacity=".55"/><circle cx="221" cy="72" r="6" fill="#D9764F" stroke="none"/></svg>
+      <svg width="120" height="76" viewBox="0 0 320 200" fill="none" stroke="#D9764F" stroke-width="1.2" opacity=".9"><path d="M10 190H310M26 170H294M40 152H280M52 136H268M63 122H257M73 110H247M82 99H238M90 89H230M97 80H223M104 72H216M110 65H210M116 59H204"/><path d="M160 59V190M148 59 128 190M172 59 192 190M136 60 96 190M184 60 224 190M126 61 64 190M194 61 256 190M118 62 34 190M202 62 286 190"/></svg>
+      <div class="stamp">
+        <svg viewBox="0 0 120 120"><defs><path id="sgArc" d="M60 60 m -44 0 a 44 44 0 1 1 88 0 a 44 44 0 1 1 -88 0"/></defs>
+          <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(245,239,227,.25)"/>
+          <text fill="#F5EFE3"><textPath href="#sgArc">BEYOND OUR BORDERS · AGENTIC AI · </textPath></text></svg>
+        <svg class="stamp__core" viewBox="0 0 24 24" style="color:#D9764F"><use href="#i-starburst"/></svg>
+      </div>
+    </div>
+  </div>
+  <p class="sg-note" style="margin-top:var(--sp-3)">Funke, Orbit-Ring, Drahtgitter-Terrain und Rundstempel.
+  <strong>Maximal drei Ornamente pro Bildschirmhöhe</strong>, immer mit <code>pointer-events:none</code>,
+  nie über Fließtext. Der Stempel rotiert in 22 s, hält bei <code>prefers-reduced-motion</code> an.</p>
+</section>
+
+<!-- ===================== 06 · BILDWELT ===================== -->
+<section class="sg-sec" id="bilder">
+  <div class="section-head"><span class="sg-num">06</span><span class="chip chip--ghost">Bildwelt</span><span class="rule"></span></div>
+  <p class="sg-note">Alle Motive sind in einem Zug erzeugt und teilen dieselbe Anweisung: 1970er-Retro-Futurismus,
+  Duoton aus Terracotta/Creme/Olive, Risograph-Korn, flache Editorial-Ästhetik, kein Text im Bild.</p>
+
+  <div class="sg-cols c2" style="margin-top:var(--sp-5)">
+    <div class="sg-demo" style="margin:0;position:relative;overflow:hidden">
+      <span class="label" style="color:var(--accent)">Hero · Freisteller auf Kreis</span>
+      <div style="position:relative;height:300px;margin-top:var(--sp-4)">
+        <div class="circle-blob deco" style="width:230px;height:230px;right:22%;top:14px"></div>
+        <img src="assets/img/hero-cutout.webp" alt="Retro-futuristischer Android-Kopf im Profil, Freisteller"
+             style="position:absolute;right:10%;bottom:0;height:300px;width:auto;object-fit:contain">
+        <svg class="deco" style="left:4%;top:30px;width:56px;color:var(--accent)" viewBox="0 0 24 24"><use href="#i-starburst"/></svg>
+      </div>
+    </div>
+    <div class="sg-demo" style="margin:0">
+      <span class="label" style="color:var(--accent)">Panel-Bild · gerahmt</span>
+      <div class="framed" style="margin-top:var(--sp-4);aspect-ratio:4/3;border-color:var(--bob-sand)">
+        <img src="assets/img/about-workstation.webp" alt="Vintage-Computerarbeitsplatz mit CRT-Monitoren in Sepia">
+      </div>
+    </div>
+  </div>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-3)">Modul-Kacheln</h3>
+  <div class="sg-cols c4">
+    <a class="tile" href="#"><div class="tile__media"><img src="assets/img/module-01.webp" alt="Abstrakte Retro-Futurismus-Grafik"><span class="tile__play"><svg><use href="#i-play"/></svg></span></div><div class="tile__title">Orchestrator</div><div class="tile__cat">Multi-Agent-Dispatch</div></a>
+    <a class="tile" href="#"><div class="tile__media"><img src="assets/img/module-02.webp" alt="Abstrakte Retro-Futurismus-Grafik"><span class="tile__play"><svg><use href="#i-play"/></svg></span></div><div class="tile__title">Autopilot</div><div class="tile__cat">Workflow-Automatisierung</div></a>
+    <a class="tile" href="#"><div class="tile__media"><img src="assets/img/module-03.webp" alt="Abstrakte Retro-Futurismus-Grafik"><span class="tile__play"><svg><use href="#i-play"/></svg></span></div><div class="tile__title">Atlas</div><div class="tile__cat">Wissensabruf &amp; RAG</div></a>
+    <a class="tile" href="#"><div class="tile__media"><img src="assets/img/module-04.webp" alt="Abstrakte Retro-Futurismus-Grafik"><span class="tile__play"><svg><use href="#i-play"/></svg></span></div><div class="tile__title">Bridge</div><div class="tile__cat">System-Integrationen</div></a>
+  </div>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-3)">Bild-Prompt — für jedes neue Motiv wiederverwenden</h3>
+  <div class="sg-demo sg-demo--olive on-dark">
+    <p style="margin:0;font-family:var(--font-mono);font-size:var(--fs-sm);line-height:1.7">
+      „<em>1970s retro-futurism, [MOTIV], duotone risograph print, limited palette of terracotta orange #C2522F,
+      warm cream #F7F1E6 and deep olive #54562E, halftone grain, heavy film grain, vintage print texture,
+      flat editorial poster aesthetic, no text</em>“
+    </p>
+  </div>
+  <p class="sg-note" style="margin-top:var(--sp-3)">Nur <code>[MOTIV]</code> wird getauscht. Der Rest bleibt wörtlich —
+  so bleiben alle Motive eine Familie. Freisteller zusätzlich mit „<em>isolated cutout, transparent background</em>“.</p>
+</section>
+
+<!-- ===================== 07 · KOMPONENTEN ===================== -->
+<section class="sg-sec" id="komponenten">
+  <div class="section-head"><span class="sg-num">07</span><span class="chip chip--ghost">Komponenten</span><span class="rule"></span></div>
+
+  <h3 class="d4" style="margin:0 0 var(--sp-3)">Buttons</h3>
+  <div class="sg-demo"><div class="row">
+    <button class="btn btn--primary">Projekt starten<span class="btn__dot"><svg><use href="#i-arrow-right"/></svg></span></button>
+    <button class="btn btn--ink">System ansehen<span class="btn__dot"><svg><use href="#i-arrow-ne"/></svg></span></button>
+    <button class="btn btn--outline">Mehr erfahren<span class="btn__dot"><svg><use href="#i-arrow-right"/></svg></span></button>
+    <button class="btn btn--text">Demo abspielen<span class="btn__dot"><svg><use href="#i-play"/></svg></span></button>
+  </div></div>
+  <div class="sg-demo sg-demo--ink on-dark"><div class="row">
+    <button class="btn btn--bone">Los geht's<span class="btn__dot"><svg><use href="#i-arrow-right"/></svg></span></button>
+    <button class="btn btn--primary">Kontakt<span class="btn__dot"><svg><use href="#i-arrow-right"/></svg></span></button>
+    <span class="icon-btn"><svg><use href="#i-plus"/></svg></span>
+    <span class="icon-btn icon-btn--filled"><svg><use href="#i-arrow-ne"/></svg></span>
+  </div></div>
+  <p class="sg-note" style="margin-top:var(--sp-3)">Jeder Button endet rechts in einem Kreis-Dot mit Icon — das ist
+  die Signatur des Systems. Beim Hover wandert der Dot 3px nach rechts, der Button 1px nach oben. Pro Bildschirm
+  <strong>genau ein</strong> Primary.</p>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-3)">Chips &amp; Sektionsköpfe</h3>
+  <div class="sg-demo">
+    <div class="row" style="margin-bottom:var(--sp-5)">
+      <span class="chip"><svg><use href="#i-sparkle"/></svg> Agentic AI Framework</span>
+      <span class="chip chip--ink">HERMES v5.5</span>
+      <span class="chip chip--rust">Produktionsreif</span>
+      <span class="chip chip--ghost">Open Source</span>
+    </div>
+    <div class="section-head" style="margin:0"><span class="chip">Was BOB kann</span><span class="rule"></span>
+      <a class="btn btn--text" href="#">Alle Module<span class="btn__dot"><svg><use href="#i-arrow-right"/></svg></span></a></div>
+  </div>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-3)">Capability-Karten</h3>
+  <div class="sg-cols c4">
+    <div class="card"><div class="badge-icon"><svg><use href="#i-orchestration"/></svg></div>
+      <div class="card__body"><h4 class="d4" style="margin:0 0 6px">Orchestrierung</h4>
+      <p>Zerlegt Anfragen in Teilaufgaben und verteilt sie parallel an spezialisierte Agents.</p></div>
+      <span class="icon-btn"><svg><use href="#i-arrow-right"/></svg></span></div>
+    <div class="card"><div class="badge-icon badge-icon--olive"><svg><use href="#i-automation"/></svg></div>
+      <div class="card__body"><h4 class="d4" style="margin:0 0 6px">Automatisierung</h4>
+      <p>Führt mehrstufige Prozesse quer über deine bestehenden Tools aus.</p></div>
+      <span class="icon-btn"><svg><use href="#i-arrow-right"/></svg></span></div>
+    <div class="card"><div class="badge-icon badge-icon--ink"><svg><use href="#i-knowledge"/></svg></div>
+      <div class="card__body"><h4 class="d4" style="margin:0 0 6px">Wissen &amp; RAG</h4>
+      <p>Erdet Antworten in deinen Dokumenten — mit Quellenangabe, nicht mit Raten.</p></div>
+      <span class="icon-btn"><svg><use href="#i-arrow-right"/></svg></span></div>
+    <div class="card"><div class="badge-icon"><svg><use href="#i-integrations"/></svg></div>
+      <div class="card__body"><h4 class="d4" style="margin:0 0 6px">Integrationen</h4>
+      <p>Verbindet sich mit APIs und bestehender Infrastruktur — ohne Migration.</p></div>
+      <span class="icon-btn"><svg><use href="#i-arrow-right"/></svg></span></div>
+  </div>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-3)">Meter, Timeline &amp; Stats — auf Ink</h3>
+  <div class="sg-demo sg-demo--ink on-dark">
+    <div class="sg-cols c2">
+      <div>
+        <span class="label" style="color:var(--bob-rust-soft)">Fähigkeiten</span>
+        <div class="stack" style="margin-top:var(--sp-4)">
+          <div class="meter"><span class="meter__name">Multi-Agent-Routing</span><span class="meter__dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+          <div class="meter"><span class="meter__name">Vector-Retrieval</span><span class="meter__dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="half"></i><i></i></span></div>
+          <div class="meter"><span class="meter__name">Code-Synthese</span><span class="meter__dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+          <div class="meter"><span class="meter__name">Tool-Integration</span><span class="meter__dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="half"></i><i></i><i></i></span></div>
+        </div>
+        <hr class="hairline" style="margin:var(--sp-6) 0">
+        <div class="row" style="gap:var(--sp-7)">
+          <div class="stat"><span class="stat__num">94%</span><span class="stat__cap">Task-Completion</span></div>
+          <div class="stat"><span class="stat__num">&lt;20ms</span><span class="stat__cap">Vector-Lookup</span></div>
+          <div class="stat"><span class="stat__num">99.2%</span><span class="stat__cap">Genauigkeit</span></div>
+        </div>
+      </div>
+      <div>
+        <span class="label" style="color:var(--bob-rust-soft)">Ausführungsschleife</span>
+        <ul class="timeline" style="margin-top:var(--sp-4)">
+          <li><span class="when">Schritt 01</span><span class="what">Understand</span><span class="where">Intent parsen, Kontext laden, Constraints prüfen.</span></li>
+          <li><span class="when">Schritt 02</span><span class="what">Route</span><span class="where">Ausführungsgraph bauen, Agents zuweisen.</span></li>
+          <li><span class="when">Schritt 03</span><span class="what">Execute</span><span class="where">Sandboxed ausführen, Fehler auto-heilen.</span></li>
+          <li><span class="when">Schritt 04</span><span class="what">Deliver</span><span class="where">Ergebnis mit Audit-Trail und Quellen zurückgeben.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-3)">Zitate &amp; Avatare</h3>
+  <div class="sg-cols c3">
+    <div class="quote"><div class="quote__mark">&ldquo;</div>
+      <p>BOB hat unsere Report-Pipeline von drei Tagen auf zwanzig Minuten gebracht. Ohne eine Zeile Migration.</p>
+      <div class="quote__who"><img src="assets/img/avatar-01.webp" alt=""><div><div class="quote__name">M. Keller</div><div class="quote__role">Head of Data, Northwind</div></div></div></div>
+    <div class="quote"><div class="quote__mark">&ldquo;</div>
+      <p>Der Unterschied ist, dass es fertige Arbeit liefert statt Vorschläge. Das war vorher nie so.</p>
+      <div class="quote__who"><img src="assets/img/avatar-02.webp" alt=""><div><div class="quote__name">S. Arendt</div><div class="quote__role">CTO, Driftlabs</div></div></div></div>
+    <div class="quote"><div class="quote__mark">&ldquo;</div>
+      <p>Quellenangaben bei jeder Antwort. Genau das, was unser Audit verlangt hat.</p>
+      <div class="quote__who"><img src="assets/img/avatar-03.webp" alt=""><div><div class="quote__name">J. Peters</div><div class="quote__role">Compliance Lead, Voltware</div></div></div></div>
+  </div>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-3)">Formulare</h3>
+  <div class="sg-demo"><div class="sg-cols c2">
+    <div class="field"><label for="f1">Name</label><input class="input" id="f1" placeholder="Wie heißt du?"></div>
+    <div class="field"><label for="f2">E-Mail</label><input class="input" id="f2" type="email" placeholder="du@firma.de"></div>
+    <div class="field" style="grid-column:1/-1"><label for="f3">Worum geht's?</label><textarea class="input" id="f3" placeholder="Beschreib kurz, was BOB für dich erledigen soll."></textarea></div>
+    <div class="field"><label>Newsletter</label><div class="input input--inline"><input placeholder="Deine E-Mail" aria-label="Newsletter-E-Mail"><span class="icon-btn icon-btn--filled"><svg><use href="#i-arrow-right"/></svg></span></div></div>
+  </div></div>
+
+  <h3 class="d4" style="margin:var(--sp-7) 0 var(--sp-3)">Trust-Leiste</h3>
+  <div class="sg-demo"><div class="trustbar">
+    <span class="avatars"><img src="assets/img/avatar-01.webp" alt=""><img src="assets/img/avatar-02.webp" alt=""><img src="assets/img/avatar-03.webp" alt=""></span>
+    <span class="trustbar__claim">Im Einsatz bei<br>Teams, die liefern</span>
+    <span class="trustbar__sep"></span>
+    <span class="trustbar__marks"><svg><use href="#i-globe-wire"/></svg><svg><use href="#i-orbit"/></svg></span>
+  </div></div>
+</section>
+
+<!-- ===================== 08 · SEITENMUSTER ===================== -->
+<section class="sg-sec" id="muster">
+  <div class="section-head"><span class="sg-num">08</span><span class="chip chip--ghost">Seitenmuster</span><span class="rule"></span></div>
+  <p class="sg-note">Die drei Blöcke, aus denen sich jede Seite zusammensetzt — live, nicht als Screenshot.</p>
+
+  <!-- HERO -->
+  <div class="sg-demo sg-demo--plain" style="padding:0;border:0">
+    <div style="display:grid;grid-template-columns:1.05fr .95fr;gap:var(--sp-6);align-items:center;min-height:440px" class="hero-pattern">
+      <div>
+        <span class="chip"><svg><use href="#i-sparkle"/></svg> Agentic AI Framework</span>
+        <h2 class="d1" style="margin:var(--sp-5) 0 var(--sp-4)">AGENTIC AI<br><span class="d-accent">THAT GETS</span><br>THINGS DONE</h2>
+        <p class="lead muted">BOB vereint Multi-Agent-Orchestrierung mit Echtzeit-Wissensabruf und Workflow-Automatisierung — und macht aus Plänen fertige Arbeit statt bloßer Antworten.</p>
+        <div class="row" style="margin-top:var(--sp-6)">
+          <a class="btn btn--primary" href="#">System ansehen<span class="btn__dot"><svg><use href="#i-arrow-right"/></svg></span></a>
+          <a class="btn btn--text" href="#">Demo abspielen<span class="btn__dot"><svg><use href="#i-play"/></svg></span></a>
+        </div>
+      </div>
+      <div style="position:relative;min-height:420px">
+        <div class="circle-blob deco" style="width:min(340px,80%);aspect-ratio:1;right:6%;top:6%"></div>
+        <svg class="deco" style="right:0;top:2%;width:60px;color:var(--accent)" viewBox="0 0 24 24"><use href="#i-starburst"/></svg>
+        <svg class="deco" style="left:2%;bottom:14%;width:74px;color:var(--accent);opacity:.5" viewBox="0 0 24 24"><use href="#i-orbit"/></svg>
+        <img src="assets/img/hero-cutout.webp" alt="Retro-futuristischer Android-Kopf im Profil"
+             style="position:absolute;right:8%;bottom:0;height:400px;width:auto;object-fit:contain">
+        <div class="panel panel--cream deco" style="left:0;bottom:6%;width:190px;padding:14px 16px;position:absolute;opacity:1">
+          <span class="label" style="line-height:1.8">Systeme bauen,<br>die wirklich<br>liefern.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OLIVE INTRO -->
+  <div class="panel panel--olive on-dark" style="margin-top:var(--sp-6)">
+    <div style="display:grid;grid-template-columns:.9fr 1.4fr .8fr;gap:var(--sp-6);align-items:center" class="intro-pattern">
+      <div class="framed"><img src="assets/img/about-workstation.webp" alt="Vintage-Computerarbeitsplatz" style="aspect-ratio:4/3"></div>
+      <div>
+        <h3 class="d2" style="margin:0 0 var(--sp-4)">HI, ICH BIN BOB</h3>
+        <p class="muted-invert" style="max-width:46ch;margin:0">Ich laufe auf HERMES — einem Multi-Agent-Framework mit zentralem Orchestrator, der Intent interpretiert, Aufgaben plant und an die richtigen Agents verteilt.</p>
+        <div class="row" style="margin-top:var(--sp-5);gap:var(--sp-6)">
+          <a class="btn btn--bone" href="#">Mehr über HERMES<span class="btn__dot"><svg><use href="#i-arrow-right"/></svg></span></a>
+          <span class="script" style="color:var(--bob-bone)">Beyond</span>
+        </div>
+      </div>
+      <ul class="facts">
+        <li><span class="dot"><svg><use href="#i-pin"/></svg></span><span>Self-hosted<br>oder Cloud</span></li>
+        <li><span class="dot"><svg><use href="#i-bolt"/></svg></span><span>&lt;2.0s mittlere<br>Latenz</span></li>
+        <li><span class="dot"><svg><use href="#i-shield"/></svg></span><span>AES-256<br>Audit-Trail</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- RUST CTA -->
+  <div class="panel panel--rust on-dark" style="margin-top:var(--sp-6)">
+    <div style="display:grid;grid-template-columns:1.2fr 1fr .9fr;gap:var(--sp-6);align-items:center" class="cta-pattern">
+      <div>
+        <span class="label" style="opacity:.8">Bereit, aufzuhören mit Beschreiben?</span>
+        <h3 class="d2" style="margin:var(--sp-3) 0 0;color:var(--bob-cream)">LASS BOB<br>ES BAUEN</h3>
+      </div>
+      <div>
+        <p style="margin:0 0 var(--sp-5);max-width:34ch">Erzähl uns, was erledigt werden soll. Wir zeigen dir, wie BOB es tatsächlich fertigstellt.</p>
+        <a class="btn btn--bone" href="mailto:hello@beyondourborders.cloud">Projekt starten<span class="btn__dot"><svg><use href="#i-arrow-right"/></svg></span></a>
+      </div>
+      <div style="position:relative">
+        <div class="stack">
+          <div><span class="label" style="opacity:.75">E-Mail</span><div style="text-decoration:underline">hello@beyondourborders.cloud</div></div>
+          <div class="row" style="gap:var(--sp-2)">
+            <span class="icon-btn" style="border-color:rgba(245,239,227,.4);color:var(--bob-bone)"><svg><use href="#i-github"/></svg></span>
+            <span class="icon-btn" style="border-color:rgba(245,239,227,.4);color:var(--bob-bone)"><svg><use href="#i-discord"/></svg></span>
+            <span class="icon-btn" style="border-color:rgba(245,239,227,.4);color:var(--bob-bone)"><svg><use href="#i-linkedin"/></svg></span>
+          </div>
+        </div>
+        <svg class="deco" style="right:-8px;top:-30px;width:110px;stroke:var(--bob-cream);opacity:.45" viewBox="0 0 240 240" fill="none" stroke-width="1.2"><ellipse cx="120" cy="120" rx="115" ry="46" transform="rotate(-28 120 120)"/><ellipse cx="120" cy="120" rx="92" ry="92"/><ellipse cx="120" cy="120" rx="115" ry="46" transform="rotate(32 120 120)"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="panel panel--ink on-dark" style="margin-top:var(--sp-6)">
+    <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr 1.2fr;gap:var(--sp-6)" class="footer-pattern">
+      <div class="nav__logo nav__logo--lg">
+        <svg style="color:var(--bob-rust-soft)"><use href="#i-starburst"/></svg>
+        <div class="mark"><b>BOB</b><small>Beyond Our Borders</small></div>
+      </div>
+      <div><span class="label" style="color:var(--bob-rust-soft)">Navigation</span>
+        <div class="linklist" style="margin-top:var(--sp-4)"><a href="#">Home</a><a href="#">About</a><a href="#">Features</a><a href="#">System</a></div></div>
+      <div><span class="label" style="color:var(--bob-rust-soft)">Info</span>
+        <div class="linklist" style="margin-top:var(--sp-4)"><a href="#">Datenschutz</a><a href="#">Impressum</a><a href="#">Status</a><span class="muted-invert">© 2026 Beyond Our Borders</span></div></div>
+      <div><span class="label" style="color:var(--bob-rust-soft)">Bleib dran</span>
+        <p class="muted-invert" style="font-size:var(--fs-sm);margin:var(--sp-3) 0 var(--sp-4)">Updates zu HERMES und neuen Modulen.</p>
+        <div class="input input--inline" style="background:transparent;border-color:var(--line-invert)"><input placeholder="Deine E-Mail" aria-label="Newsletter"><span class="icon-btn icon-btn--filled"><svg><use href="#i-arrow-right"/></svg></span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 09 · REGELN ===================== -->
+<section class="sg-sec" id="regeln">
+  <div class="section-head"><span class="sg-num">09</span><span class="chip chip--ghost">Regeln</span><span class="rule"></span></div>
+  <div class="sg-cols c2">
+    <div class="stack">
+      <div class="rule-card do"><h4>Richtig</h4><p>Display immer in Versalien, mit genau einer Rust-Zeile als Betonung.</p></div>
+      <div class="rule-card do"><h4>Richtig</h4><p>Jeder Button endet in einem Kreis-Dot mit Icon — ohne Ausnahme.</p></div>
+      <div class="rule-card do"><h4>Richtig</h4><p>Dunkle Panels als abgerundete Slabs (32px) in den Creme-Fluss setzen, nie randlos über die volle Breite.</p></div>
+      <div class="rule-card do"><h4>Richtig</h4><p>Korn-Overlay auf jeder Seite aktiv lassen — 5,5 % Deckkraft, auf Mobil 4 %.</p></div>
+      <div class="rule-card do"><h4>Richtig</h4><p>Auf Ink und Olive <code>--bob-rust-soft</code> als Akzent verwenden, nicht <code>--bob-rust</code>.</p></div>
+      <div class="rule-card do"><h4>Richtig</h4><p>Neue Bilder ausschließlich über den dokumentierten Prompt erzeugen, damit die Bildfamilie geschlossen bleibt.</p></div>
+    </div>
+    <div class="stack">
+      <div class="rule-card dont"><h4>Falsch</h4><p>Reinweiß (#FFF) oder Reinschwarz (#000) einsetzen. Es gibt nur Creme und Ink.</p></div>
+      <div class="rule-card dont"><h4>Falsch</h4><p>Farbverläufe, Glow, Neon oder Glasmorphismus. Das System ist gedruckt, nicht beleuchtet.</p></div>
+      <div class="rule-card dont"><h4>Falsch</h4><p>Anton für Fließtext oder Space Mono in Gemischtschrift. Jede Schrift hat eine Aufgabe.</p></div>
+      <div class="rule-card dont"><h4>Falsch</h4><p>Mehr als ein Primary-Button pro Bildschirm oder mehr als drei Ornamente pro Bildschirmhöhe.</p></div>
+      <div class="rule-card dont"><h4>Falsch</h4><p>Die Signaturschrift Parisienne für Headlines, Labels oder mehrfach pro Seite.</p></div>
+      <div class="rule-card dont"><h4>Falsch</h4><p>Fremde Icon-Bibliotheken mischen. Neue Icons werden im 24er-Raster mit Strichstärke 1.75 nachgezeichnet.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 10 · TOKEN-REFERENZ ===================== -->
+<section class="sg-sec" id="tokens">
+  <div class="section-head"><span class="sg-num">10</span><span class="chip chip--ghost">Token-Referenz</span><span class="rule"></span></div>
+  <p class="sg-note">Vollständige Liste in <code>assets/tokens.css</code>. Komponenten in <code>assets/bob.css</code>.
+  Hardcodierte Werte sind im Produktionscode nicht zulässig.</p>
+  <div class="table-scroll" style="margin-top:var(--sp-5)"><table class="spec">
+    <thead><tr><th>Token</th><th>Wert</th><th>Verwendung</th></tr></thead>
+    <tbody>
+      <tr><td>--bob-cream</td><td>#F7F1E6</td><td>Seitengrund, Karten</td></tr>
+      <tr><td>--bob-rust</td><td>#C2522F</td><td>Akzent, CTA, Display-Betonung</td></tr>
+      <tr><td>--bob-rust-soft</td><td>#D9764F</td><td>Akzent auf Ink/Olive</td></tr>
+      <tr><td>--bob-olive</td><td>#54562E</td><td>Sekundäres Panel</td></tr>
+      <tr><td>--bob-ink</td><td>#171310</td><td>Nav, dunkle Panels, Footer</td></tr>
+      <tr><td>--font-display</td><td>Anton</td><td>Alle Display-Größen, Versalien</td></tr>
+      <tr><td>--font-body</td><td>Space Grotesk</td><td>Fließtext, Lead</td></tr>
+      <tr><td>--font-mono</td><td>Space Mono</td><td>Labels, Buttons, Nav, Meta</td></tr>
+      <tr><td>--font-script</td><td>Parisienne</td><td>Signatur, max. 1× pro Seite</td></tr>
+      <tr><td>--r-pill</td><td>999px</td><td>Button, Chip, Input, Nav</td></tr>
+      <tr><td>--r-lg / --r-xl</td><td>22px / 32px</td><td>Karte / Panel</td></tr>
+      <tr><td>--grid-gap</td><td>24px</td><td>12-Spalten-Raster</td></tr>
+      <tr><td>--wrap</td><td>1200px</td><td>Maximale Inhaltsbreite</td></tr>
+      <tr><td>--ease</td><td>cubic-bezier(.2,.7,.3,1)</td><td>Alle Übergänge — mechanisch, nie federnd</td></tr>
+      <tr><td>--grain-opacity</td><td>.055</td><td>Korn-Overlay (Mobil .04)</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<footer style="padding:var(--sp-7) 0 0;border-top:1px solid var(--line)">
+  <div class="row" style="justify-content:space-between">
+    <span class="label muted">BOB Design System · v1.0 · Retro-Futurism</span>
+    <span class="label muted">beyondourborders.cloud</span>
+  </div>
+</footer>
+
+</div>
+
+<style>
+@media (max-width: 880px) {
+  .hero-pattern, .intro-pattern, .cta-pattern { grid-template-columns: 1fr !important; }
+  .footer-pattern { grid-template-columns: 1fr 1fr !important; }
+  .hero-pattern > div:last-child { min-height: 340px !important; }
+}
+@media (max-width: 520px) { .footer-pattern { grid-template-columns: 1fr !important; } }
+</style>
+</body>
+</html>

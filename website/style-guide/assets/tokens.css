@@ -1,0 +1,109 @@
+/* ==========================================================================
+   BOB — Beyond Our Borders
+   Design Tokens · Retro-Futurism System v1.0
+   Single source of truth. Never hardcode a value that exists here.
+   ========================================================================== */
+
+:root {
+  /* ---- CORE PALETTE ---------------------------------------------------- */
+  --bob-cream:        #F7F1E6;  /* page ground */
+  --bob-cream-deep:   #EFE6D6;  /* recessed cream, inset wells */
+  --bob-sand:         #E3D6BC;  /* hairlines on cream, muted fills */
+
+  --bob-rust:         #C2522F;  /* PRIMARY accent — CTA, marks, rules */
+  --bob-rust-deep:    #A5401F;  /* pressed / hover state */
+  --bob-rust-soft:    #D9764F;  /* on-dark accent, needs the lift */
+
+  --bob-olive:        #54562E;  /* secondary panel ground */
+  --bob-olive-deep:   #3E4022;  /* olive borders + pressed */
+  --bob-olive-soft:   #6E7040;  /* olive hairline on olive */
+
+  --bob-ink:          #171310;  /* near-black panel ground */
+  --bob-ink-soft:     #2A231D;  /* raised surface on ink */
+
+  --bob-bone:         #F5EFE3;  /* text on dark grounds */
+  --bob-bone-dim:     rgba(245,239,227,.64);
+
+  /* ---- SEMANTIC ROLES -------------------------------------------------- */
+  --surface:          var(--bob-cream);
+  --surface-sunk:     var(--bob-cream-deep);
+  --surface-ink:      var(--bob-ink);
+  --surface-olive:    var(--bob-olive);
+  --surface-rust:     var(--bob-rust);
+
+  --text:             var(--bob-ink);
+  --text-muted:       rgba(23,19,16,.62);
+  --text-invert:      var(--bob-bone);
+  --text-invert-muted:var(--bob-bone-dim);
+
+  --accent:           var(--bob-rust);
+  --accent-hover:     var(--bob-rust-deep);
+
+  --line:             rgba(23,19,16,.14);   /* hairline on cream */
+  --line-strong:      rgba(23,19,16,.28);
+  --line-invert:      rgba(245,239,227,.18); /* hairline on ink/olive */
+
+  /* ---- STATUS ---------------------------------------------------------- */
+  --ok:               #6E7040;
+  --warn:             #C98A2E;
+  --danger:           #A5401F;
+  --info:             #4E6B70;
+
+  /* ---- TYPOGRAPHY ------------------------------------------------------ */
+  --font-display: "Anton", "Arial Narrow", "Haettenschweiler", sans-serif;
+  --font-body:    "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    "Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-script:  "Parisienne", "Brush Script MT", cursive;
+
+  /* Display scale — fluid, clamped. Always uppercase, always tight. */
+  --fs-d1: clamp(3.25rem, 8.5vw, 7rem);    /* hero line */
+  --fs-d2: clamp(2.5rem, 5.5vw, 4.25rem);  /* section hero */
+  --fs-d3: clamp(1.75rem, 3.2vw, 2.5rem);  /* panel title */
+  --fs-d4: clamp(1.25rem, 2.2vw, 1.6rem);  /* card title */
+
+  /* Text scale */
+  --fs-lead: 1.125rem;
+  --fs-body: 0.9375rem;
+  --fs-sm:   0.8125rem;
+  --fs-xs:   0.6875rem;   /* mono labels, eyebrows */
+
+  --lh-display: 0.88;
+  --lh-tight:   1.15;
+  --lh-body:    1.6;
+
+  --tr-display: -0.02em;  /* display tracking: negative, always */
+  --tr-label:   0.16em;   /* mono label tracking: wide, always */
+
+  /* ---- SPACE — 4px base ------------------------------------------------ */
+  --sp-1: 4px;   --sp-2: 8px;   --sp-3: 12px;  --sp-4: 16px;
+  --sp-5: 24px;  --sp-6: 32px;  --sp-7: 48px;  --sp-8: 64px;
+  --sp-9: 96px;  --sp-10: 128px;
+
+  /* ---- RADII — the pill/slab signature --------------------------------- */
+  --r-sm:   8px;
+  --r-md:   14px;
+  --r-lg:   22px;    /* cards */
+  --r-xl:   32px;    /* full-bleed panels */
+  --r-pill: 999px;   /* buttons, chips, eyebrows — the house shape */
+
+  /* ---- BORDERS & ELEVATION --------------------------------------------- */
+  --bw:       1px;
+  --bw-thick: 2px;
+  --shadow-card:  0 1px 0 rgba(23,19,16,.06), 0 12px 28px -18px rgba(23,19,16,.45);
+  --shadow-lift:  0 2px 0 rgba(23,19,16,.08), 0 22px 44px -22px rgba(23,19,16,.55);
+
+  /* ---- MOTION — mechanical, never bouncy -------------------------------- */
+  --ease:      cubic-bezier(.2,.7,.3,1);
+  --dur-fast:  140ms;
+  --dur-base:  220ms;
+  --dur-slow:  420ms;
+
+  /* ---- LAYOUT ---------------------------------------------------------- */
+  --wrap:      1200px;
+  --gutter:    clamp(16px, 4vw, 40px);
+  --grid-cols: 12;
+  --grid-gap:  var(--sp-5);
+
+  /* ---- TEXTURE — the grain is not optional ------------------------------ */
+  --grain-opacity: .055;
+}
